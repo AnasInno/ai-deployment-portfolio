@@ -19,10 +19,15 @@ jobs:
       - name: Check live portfolio
         run: |
           set -euo pipefail
-          html="$(curl -fsSL https://anasinno.github.io/ai-deployment-portfolio/)"
+          html="$(curl -fsSL https://anas.shortlistops.co.uk/)"
           grep -q "AI Deployment Engineer" <<< "$html"
           grep -q "Hosted Gateway" <<< "$html"
           grep -q "Gateway Source" <<< "$html"
+
+      - name: Check GitHub Pages fallback
+        run: |
+          set -euo pipefail
+          curl -fsSL https://anasinno.github.io/ai-deployment-portfolio/ | grep -q "AI Deployment Engineer"
 
       - name: Check hosted Gateway public endpoints
         run: |

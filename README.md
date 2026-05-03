@@ -5,7 +5,9 @@
 
 Public-safe portfolio for AI Deployment Engineer, Forward Deployed Engineer, and Applied AI Engineer roles.
 
-Live site: https://anasinno.github.io/ai-deployment-portfolio/
+Live site: https://anas.shortlistops.co.uk/
+
+GitHub Pages fallback: https://anasinno.github.io/ai-deployment-portfolio/
 
 Hosted Gateway API docs: https://ai-gateway.shortlistops.co.uk/docs
 
