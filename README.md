@@ -50,6 +50,8 @@ make run
 
 This repo intentionally excludes private job-application trackers, phone number, secrets, internal TeachClaw source code, private IPs, and user/customer data.
 
+See `PUBLIC_BOUNDARY.md` for the explicit public/private boundary. `public-safety.yml` enforces the most important leakage checks in CI.
+
 ## Verification
 
 - GitHub Actions runs Gateway tests and a smoke check on every Gateway change.

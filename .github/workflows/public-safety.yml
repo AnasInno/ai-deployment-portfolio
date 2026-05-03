@@ -1,0 +1,34 @@
+name: Public Safety
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Block private career artifacts and local residue
+        run: |
+          set -euo pipefail
+
+          if git ls-files | grep -E '(^|/)(__pycache__|\\.pytest_cache|\\.venv|data)(/|$)|\\.pyc$|\\.sqlite$|(^|/)\\.env(\\.|$)' | grep -Ev '(^|/)\\.env\\.example$' ; then
+            echo "Private/local residue found in tracked files."
+            exit 1
+          fi
+
+          if grep -RInE '7388|281312|\\+44|manual-submit|application-answers|target-roles|application queue|submit queue|jobs\\.ashbyhq|greenhouse\\.io|lever\\.co|GATEWAY_API_KEY=portfolio-demo-key' . \
+            --exclude-dir=.git \
+            --exclude=public-safety.yml ; then
+            echo "Private career/search artifact or sensitive value found."
+            exit 1
+          fi
+
+      - name: Confirm public proof links are present
+        run: |
+          set -euo pipefail
+          grep -R "https://anasinno.github.io/ai-deployment-portfolio/" README.md index.html
+          grep -R "https://ai-gateway.shortlistops.co.uk/docs" README.md index.html
