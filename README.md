@@ -4,7 +4,7 @@ Public-safe portfolio for AI Deployment Engineer, Forward Deployed Engineer, and
 
 Live site: https://anasinno.github.io/ai-deployment-portfolio/
 
-Live Gateway demo: https://ai-deployment-gateway-demo.anasinno.workers.dev/
+Hosted Gateway API docs: https://ai-gateway.shortlistops.co.uk/docs
 
 ## What This Contains
 
@@ -13,7 +13,6 @@ Live Gateway demo: https://ai-deployment-gateway-demo.anasinno.workers.dev/
 - CV PDF under `assets/`
 - TeachClaw/OpenClaw architecture diagram under `assets/`
 - Public-safe FastAPI AI Deployment Gateway under `gateway/`
-- Always-on Cloudflare Worker Gateway demo under `worker/`
 
 ## Gateway
 
