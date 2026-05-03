@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ai-deployment-gateway</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">ai-deployment-gateway</h1>
+</header>
+<h1 id="ai-deployment-gateway">AI Deployment Gateway</h1>
+<h2 id="one-line-summary">One-Line Summary</h2>
+<p>Public-safe FastAPI mini-project that demonstrates how I think about
+AI deployment readiness: evidence ingestion, retrieval, evals, release
+gates, rollback plans, Docker, and CI.</p>
+<h2 id="why-i-built-it">Why I Built It</h2>
+<p>TeachClaw and OpenClaw contain the strongest real evidence, but not
+all of that code or operational context should be public. This project
+creates a small, clean artifact I can point hiring teams to without
+exposing private product code, teacher data, runtime secrets, or
+internal OpenClaw setup.</p>
+<p>The goal is not to pretend this is an enterprise platform. The goal
+is to show the shape of production AI deployment work in a repo a
+recruiter or engineer can understand quickly.</p>
+<h2 id="what-it-proves">What It Proves</h2>
+<ul>
+<li>Python/FastAPI service design with explicit request/response
+schemas.</li>
+<li>Document ingestion and retrieval with stable source IDs.</li>
+<li>Eval runs that can require expected terms and expected source
+documents.</li>
+<li>Deployment registration with owner, environment, rollback plan, risk
+notes, and pass-rate threshold.</li>
+<li>Readiness endpoint that returns <code>pass</code>,
+<code>needs_judgement</code>, or <code>block</code>.</li>
+<li>Health and metrics surfaces for operational inspection.</li>
+<li>SQLite-backed persistence for documents, deployment profiles, eval
+runs, and audit events.</li>
+<li>Optional API-key protection for write endpoints.</li>
+<li>Audit endpoint and structured JSON write logs.</li>
+<li>Dockerfile, docker-compose, Makefile, and GitHub Actions CI.</li>
+</ul>
+<h2 id="why-it-maps-to-ai-deployment-roles">Why It Maps To AI Deployment
+Roles</h2>
+<p>AI deployment roles rarely fail because someone cannot call a model
+API. They fail when teams cannot tell whether a system is ready to
+launch, which evidence is current, which evals matter, what rollback
+means, and whether the live system is using the version they think it is
+using.</p>
+<p>This project turns those instincts into a small public system:</p>
+<ol type="1">
+<li>Register the deployment.</li>
+<li>Ingest the evidence or documents the system relies on.</li>
+<li>Run evals against the behavior that matters.</li>
+<li>Record an audit trail of deployment/eval activity.</li>
+<li>Check readiness before launch.</li>
+<li>Inspect health, metrics, and recent audit events.</li>
+</ol>
+<h2 id="stack">Stack</h2>
+<ul>
+<li>Python</li>
+<li>FastAPI</li>
+<li>Pydantic</li>
+<li>SQLite</li>
+<li>Pytest</li>
+<li>Docker</li>
+<li>GitHub Actions</li>
+</ul>
+<h2 id="honest-scope">Honest Scope</h2>
+<p>Current implementation uses deterministic token-overlap retrieval and
+SQLite state. That is intentional for a compact public proof. The next
+real production step would be hosted deployment, embeddings/vector
+search, rate limits, stronger service auth, and immutable eval
+reports.</p>
+<h2 id="repo-path">Repo Path</h2>
+<p><code>mini-project/</code></p>
+</body>
+</html>

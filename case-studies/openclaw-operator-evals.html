@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>openclaw-operator-evals</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">openclaw-operator-evals</h1>
+</header>
+<h1 id="case-study-openclaw-operator-and-eval-system">Case Study:
+OpenClaw Operator And Eval System</h1>
+<h2 id="one-line-version">One-Line Version</h2>
+<p>I used OpenClaw as an AI operator cockpit around TeachClaw: routing
+work to agents, surfacing commands, running validation lanes, preserving
+memory, and turning failures into repeatable proving loops.</p>
+<h2 id="problem">Problem</h2>
+<p>Building an AI product with agents creates a second system to manage:
+context, memory, routing, validation, live/runtime drift, and task
+handoff. Without an operator layer, the team repeats prompts, loses
+state, and promotes changes without enough evidence.</p>
+<h2 id="system">System</h2>
+<p>OpenClaw provides the runtime shell:</p>
+<ul>
+<li>Gateway and chat/session layer</li>
+<li>Plugins and skills</li>
+<li>Agent contexts and command surfaces</li>
+<li>Cron/heartbeat jobs</li>
+<li>LCM long-context memory database</li>
+<li>Local operator cockpit for TeachClaw development</li>
+</ul>
+<p>TeachClaw then adds repo-local operating modes:</p>
+<ul>
+<li><code>teachclawdevelopment</code>: default monothread development
+flow</li>
+<li><code>teachclawoperator</code>: operator-over-workers escalation
+path</li>
+<li><code>teachclaw-test</code>: proving runtime</li>
+<li>local test gateway and agentic eval harness</li>
+</ul>
+<h2 id="what-i-owned">What I Owned</h2>
+<ul>
+<li>GPT-only route cleanup for TeachClaw operator work.</li>
+<li>Command/skill discoverability so the operator system can invoke
+TeachClaw loops visibly.</li>
+<li>Validation artifact contract with concise trust summaries.</li>
+<li>Local/live boundary design: local autonomous work is allowed; live
+external actions need explicit approval.</li>
+<li>Reliability-first priority order: reliability, speed, autonomy,
+cost.</li>
+</ul>
+<h2 id="evaluation-design">Evaluation Design</h2>
+<p>The eval stack evolved from simple tests into product-shaped
+gates:</p>
+<ul>
+<li>Focused unit/type/runtime checks</li>
+<li>Local TeachClaw test gateway</li>
+<li>Scenario packs for teacher-core, reliability, teacher experience,
+Abshir transcript, memory, and observation-only soak work</li>
+<li>Promotion summaries with <code>trust_level</code>,
+<code>next_action</code>, failing gates, and drift status</li>
+<li>Regression diagnosis before patching surprising failures</li>
+</ul>
+<h2 id="example-scenarios">Example Scenarios</h2>
+<ul>
+<li><code>regression-no-debug-chatter</code>: prevent internal dev text
+from leaking to teachers.</li>
+<li><code>worksheet-core-generation</code>: verify core worksheet
+artifact generation.</li>
+<li><code>delivery-file-send-check</code>: check generated files are
+delivered as files, not raw paths/text.</li>
+<li><code>provisioning-cloud-init-contract</code>: protect runtime
+provisioning assumptions.</li>
+<li><code>journey-local-change-to-promotion-candidate</code>: model the
+path from local change to promotion discussion.</li>
+</ul>
+<h2 id="hard-problems">Hard Problems</h2>
+<h3 id="context-drift">Context Drift</h3>
+<p>Generated current-state files can lag the real checkout. The operator
+model treats docs as useful but always verifies branch state, recent
+commits, and validation artifacts before trusting them.</p>
+<h3 id="false-confidence">False Confidence</h3>
+<p>Mechanical pass is not always product pass. <code>.docx</code> and
+<code>.pptx</code> outputs may still require human quality judgement
+even when the runtime is correct.</p>
+<h3 id="agentic-loop-reliability">Agentic Loop Reliability</h3>
+<p>Long-running agent tests need checkpointing, resumability, artifact
+copying, and clear failure classification. Otherwise the harness itself
+becomes the failure source.</p>
+<h2 id="proof">Proof</h2>
+<ul>
+<li>Local reliability pack reached a trustworthy local bar with 5/5
+mechanical passes and no lane-instability failures in the remembered
+run.</li>
+<li>Teacher-memory long-session eval reached 1 pass, 0 fail, 0 needs
+judgement in the remembered proof object.</li>
+<li>Operator cleanup made TeachClaw commands visible from the main
+OpenClaw control system.</li>
+<li>Validation summaries became compact enough for future agents to
+decide quickly whether a run was trustworthy.</li>
+</ul>
+<h2 id="role-relevance">Role Relevance</h2>
+<p>This maps to FDE/AI deployment roles because enterprise AI
+deployments need more than model calls:</p>
+<ul>
+<li>deployment gates</li>
+<li>customer-shaped scenarios</li>
+<li>eval design</li>
+<li>production incident learning</li>
+<li>crisp status reporting</li>
+<li>safe autonomy boundaries</li>
+<li>repeatable deployment patterns</li>
+</ul>
+<p>That is the actual work behind “AI adoption” once prototypes meet
+real users.</p>
+</body>
+</html>

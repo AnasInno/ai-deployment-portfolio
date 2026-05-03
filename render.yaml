@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ai-deployment-gateway
+    runtime: docker
+    plan: free
+    dockerContext: ./gateway
+    dockerfilePath: ./gateway/Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: GATEWAY_DB_PATH
+        value: /data/gateway.db
+      - key: GATEWAY_API_KEY
+        sync: false
+    disks:
+      - name: gateway-data
+        mountPath: /data
+        sizeGB: 1

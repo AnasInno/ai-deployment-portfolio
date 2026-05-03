@@ -1,0 +1,45 @@
+{
+  "documents": [
+    {
+      "id": "teachclaw-runtime",
+      "text": "TeachClaw routes teacher requests into worksheets, lesson decks, marking support, feedback, and generated classroom documents.",
+      "tags": ["teacher-workflow", "artifacts", "deployment"]
+    },
+    {
+      "id": "openclaw-evals",
+      "text": "OpenClaw validation lanes check routing, memory boundaries, artifact behavior, tool discipline, readiness gates, and guarded live smoke evidence.",
+      "tags": ["evals", "readiness", "operator"]
+    },
+    {
+      "id": "gateway-proof",
+      "text": "The AI Deployment Gateway demonstrates FastAPI schemas, SQLite persistence, API-key write protection, audit events, metrics, readiness checks, Docker, and CI.",
+      "tags": ["fastapi", "sqlite", "audit"]
+    }
+  ],
+  "deployment": {
+    "name": "TeachClaw",
+    "environment": "local",
+    "owner": "Anas Abdi",
+    "rollback_plan": "Revert to last validated route bundle and rerun gateway smoke tests.",
+    "risk_notes": [
+      "Artifact contracts can drift across runtime layers.",
+      "Readiness requires eval evidence plus human judgement for generated teaching quality."
+    ],
+    "required_eval_pass_rate": 1.0
+  },
+  "question": "What proves TeachClaw deployment readiness?",
+  "eval": {
+    "cases": [
+      {
+        "question": "What checks TeachClaw readiness?",
+        "expected_terms": ["routing", "readiness", "smoke"],
+        "expected_source_ids": ["openclaw-evals"]
+      },
+      {
+        "question": "What does the gateway demonstrate?",
+        "expected_terms": ["FastAPI", "SQLite", "audit"],
+        "expected_source_ids": ["gateway-proof"]
+      }
+    ]
+  }
+}

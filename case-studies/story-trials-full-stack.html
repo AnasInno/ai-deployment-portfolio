@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>story-trials-full-stack</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">story-trials-full-stack</h1>
+</header>
+<h1 id="case-study-story-trials-full-stack-system">Case Study: Story
+Trials Full-Stack System</h1>
+<h2 id="one-line-version">One-Line Version</h2>
+<p>I built Story Trials, a full-stack prototype for decentralized
+licensing of synthetic health datasets using Next.js, Express,
+PostgreSQL/Prisma, IPFS, and Story Protocol on the Aeneid testnet.</p>
+<h2 id="problem">Problem</h2>
+<p>Health data access is often opaque: contributors lose visibility over
+ownership, licensing, and compensation. Story Trials explored whether
+blockchain-based intellectual property rails could make synthetic health
+dataset licensing more transparent and auditable.</p>
+<h2 id="system">System</h2>
+<p>Users can:</p>
+<ol type="1">
+<li>Connect a MetaMask wallet through RainbowKit/WalletConnect.</li>
+<li>Register a synthetic dataset.</li>
+<li>Upload metadata to IPFS.</li>
+<li>Register the dataset as an IP asset on Story Protocol.</li>
+<li>Browse a marketplace of datasets.</li>
+<li>Purchase a licence with on-chain proof.</li>
+<li>View royalty/licence history.</li>
+</ol>
+<h2 id="stack">Stack</h2>
+<ul>
+<li>Frontend: Next.js</li>
+<li>Backend: Express.js API</li>
+<li>Database: PostgreSQL with Prisma ORM</li>
+<li>Storage: IPFS for dataset metadata</li>
+<li>Chain: Story Protocol, Aeneid testnet</li>
+<li>Wallet/Auth: MetaMask, RainbowKit, WalletConnect</li>
+<li>Tests: Vitest</li>
+</ul>
+<h2 id="what-i-owned">What I Owned</h2>
+<ul>
+<li>End-to-end architecture and implementation.</li>
+<li>Data model design with users, assets, licences, trials, submissions,
+royalty events, and payouts.</li>
+<li>Story Protocol SDK integration.</li>
+<li>IPFS mode handling.</li>
+<li>Functional testing and usability evaluation.</li>
+<li>Dissertation-quality technical writeup and demo.</li>
+</ul>
+<h2 id="proof">Proof</h2>
+<ul>
+<li>Demo dataset: 14 registered assets and 7 licences.</li>
+<li>Real on-chain transactions on Aeneid testnet, not mocked.</li>
+<li>All 6 core workflows passed end-to-end functional testing.</li>
+<li>35 automated Vitest tests passed across validation, synthetic data
+guard, user utilities, and IPFS local mode.</li>
+<li>Usability test with 5 participants produced an average SUS score of
+88.5.</li>
+</ul>
+<h2 id="limitations-i-identified">Limitations I Identified</h2>
+<ul>
+<li>Backend-held signing key is not production-safe for a true trustless
+system.</li>
+<li>Testnet-only deployment means real economics, gas, and reliability
+were not proven.</li>
+<li>IPFS pinning reliability needs production hardening.</li>
+<li>Regulatory/data-governance work would be required for real health
+data.</li>
+<li>User study size was small; stronger evaluation would need structured
+tasks and more participants.</li>
+</ul>
+<h2 id="role-relevance">Role Relevance</h2>
+<p>Story Trials proves full-stack engineering range:</p>
+<ul>
+<li>modern frontend/backend architecture</li>
+<li>database modelling</li>
+<li>third-party SDK integration</li>
+<li>API design</li>
+<li>Web3 auth/transaction flows</li>
+<li>testing and evaluation</li>
+<li>honest technical trade-off analysis</li>
+</ul>
+<p>It is especially useful for roles that value engineers who can build
+a prototype, explain the architecture, and know what would need to
+change before production.</p>
+</body>
+</html>
