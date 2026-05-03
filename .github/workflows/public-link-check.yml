@@ -1,0 +1,35 @@
+name: Public Link Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 8 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+      - "index.html"
+      - ".github/workflows/public-link-check.yml"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check live portfolio
+        run: |
+          set -euo pipefail
+          html="$(curl -fsSL https://anasinno.github.io/ai-deployment-portfolio/)"
+          grep -q "AI Deployment Engineer" <<< "$html"
+          grep -q "Hosted Gateway" <<< "$html"
+          grep -q "Gateway Source" <<< "$html"
+
+      - name: Check hosted Gateway public endpoints
+        run: |
+          set -euo pipefail
+          curl -fsSL https://ai-gateway.shortlistops.co.uk/health | tee /tmp/health.json
+          grep -q '"status":"ok"' /tmp/health.json
+          curl -fsSL https://ai-gateway.shortlistops.co.uk/deployments/teachclaw-local/readiness | tee /tmp/readiness.json
+          grep -q '"status":"pass"' /tmp/readiness.json
+          curl -fsSL https://ai-gateway.shortlistops.co.uk/metrics | tee /tmp/metrics.json
+          grep -q '"storage":"sqlite"' /tmp/metrics.json
