@@ -202,6 +202,34 @@
         font-size: 14px;
       }
 
+      .fit-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 16px;
+      }
+
+      .fit-panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 22px;
+      }
+
+      .fit-panel h3 {
+        margin: 0 0 14px;
+        font-size: 20px;
+      }
+
+      .fit-panel p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .fit-panel .list {
+        margin-top: 16px;
+      }
+
       .cases {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -310,6 +338,7 @@
         }
 
         .proof-grid,
+        .fit-grid,
         .cases,
         .architecture {
           grid-template-columns: 1fr;
@@ -378,6 +407,38 @@
           <div class="proof">
             <strong>9</strong>
             <span>FastAPI gateway tests covering auth, evals, readiness, metrics, and audit events.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="fit">
+        <div class="section-heading">
+          <h2>Why This Fits</h2>
+          <p class="section-note">I am earlier-career by title, but the work shape is already close to AI deployment: user workflow, LLM system, runtime, evals, launch proof, and iteration.</p>
+        </div>
+        <div class="fit-grid">
+          <div class="fit-panel">
+            <h3>Positioning</h3>
+            <p>
+              I am not claiming ten years of enterprise delivery. I am claiming unusually direct founder/operator reps in the exact loop FDE and AI deployment teams care about: understand the workflow, build the AI path, ship it, debug it, and turn failures into evidence.
+            </p>
+          </div>
+          <div class="fit-panel">
+            <h3>Deployment Loop</h3>
+            <div class="list">
+              <div class="list-item">
+                <strong>Workflow discovery</strong>
+                <span>Teacher and field-service workflows converted into concrete AI surfaces.</span>
+              </div>
+              <div class="list-item">
+                <strong>Production-shaped engineering</strong>
+                <span>FastAPI, Docker, CI, health checks, smoke checks, readiness gates, and hosted proof.</span>
+              </div>
+              <div class="list-item">
+                <strong>Eval-led iteration</strong>
+                <span>Scenario packs, source checks, memory boundaries, artifact checks, and promotion summaries.</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
