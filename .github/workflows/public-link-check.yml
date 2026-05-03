@@ -27,7 +27,8 @@ jobs:
       - name: Check GitHub Pages fallback
         run: |
           set -euo pipefail
-          curl -fsSL https://anasinno.github.io/ai-deployment-portfolio/ | grep -q "AI Deployment Engineer"
+          fallback="$(curl -fsSL https://anasinno.github.io/ai-deployment-portfolio/)"
+          grep -q "AI Deployment Engineer" <<< "$fallback"
 
       - name: Check hosted Gateway public endpoints
         run: |
