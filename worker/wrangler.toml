@@ -1,0 +1,8 @@
+name = "ai-deployment-gateway-demo"
+main = "src/index.ts"
+compatibility_date = "2026-05-03"
+account_id = "1f4cd9e2074c7e55f92bdea83eae2f14"
+workers_dev = true
+
+[observability]
+enabled = true
