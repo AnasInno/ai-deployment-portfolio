@@ -19,7 +19,10 @@ class SmokeFailure(RuntimeError):
 
 def send_json(method: str, base_url: str, path: str, payload: Optional[dict[str, Any]] = None, api_key: Optional[str] = None) -> tuple[int, Any]:
     body = None if payload is None else json.dumps(payload).encode("utf-8")
-    headers = {"Content-Type": "application/json"}
+    headers = {
+        "Content-Type": "application/json",
+        "User-Agent": "Anas-AI-Deployment-Gateway-Smoke/1.0",
+    }
     if api_key:
         headers["X-API-Key"] = api_key
     req = request.Request(base_url.rstrip("/") + path, data=body, headers=headers, method=method)
