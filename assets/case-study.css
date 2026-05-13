@@ -1,0 +1,189 @@
+:root {
+  --ink: #151310;
+  --paper: #f4efe5;
+  --paper-soft: #fbf8f0;
+  --panel: #fffdf7;
+  --muted: #6d6256;
+  --line: #d9ccb9;
+  --brass: #b97c28;
+  --blue: #315d91;
+  --clay: #ae5a35;
+  --green: #557a41;
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, #fff8ea 0, var(--paper) 440px),
+    var(--paper);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.65;
+}
+
+a {
+  color: inherit;
+}
+
+.case-nav,
+.case-body,
+.case-footer {
+  width: min(980px, calc(100% - 36px));
+  margin: 0 auto;
+}
+
+.case-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  padding: 28px 0 56px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.case-nav strong {
+  color: var(--ink);
+}
+
+.case-nav div {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.case-body {
+  padding-bottom: 76px;
+}
+
+.case-body > h1:first-child {
+  max-width: 860px;
+  margin: 0 0 24px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(44px, 7vw, 86px);
+  line-height: 0.94;
+  letter-spacing: 0;
+}
+
+.case-body > h1:first-child::before {
+  content: "Case study";
+  display: block;
+  margin-bottom: 18px;
+  color: var(--brass);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.case-body > h2 {
+  margin: 54px 0 14px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.case-body > h3 {
+  margin: 30px 0 10px;
+  font-size: 22px;
+  letter-spacing: 0;
+}
+
+.case-body p,
+.case-body li {
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.case-body p:first-of-type {
+  max-width: 760px;
+  color: #342c24;
+  font-size: clamp(20px, 2.3vw, 25px);
+  line-height: 1.45;
+}
+
+.case-body ul,
+.case-body ol {
+  display: grid;
+  gap: 10px;
+  padding-left: 24px;
+}
+
+.case-body pre {
+  overflow: auto;
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 18px;
+}
+
+.case-body code {
+  color: #2d271f;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+}
+
+.case-body blockquote {
+  margin: 28px 0;
+  border-left: 4px solid var(--brass);
+  background: var(--panel);
+  padding: 16px 18px;
+  color: var(--muted);
+}
+
+.case-body table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+  display: block;
+}
+
+.case-body th,
+.case-body td {
+  border-bottom: 1px solid var(--line);
+  padding: 10px;
+  text-align: left;
+}
+
+.case-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 32px 0 46px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 720px) {
+  .case-nav,
+  .case-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .case-nav div {
+    justify-content: flex-start;
+  }
+
+  .case-body > h1:first-child {
+    font-size: clamp(40px, 12vw, 58px);
+  }
+}
