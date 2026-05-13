@@ -1,0 +1,66 @@
+<h1 id="jeweller-clienteling-agent-openclaw-runtime-proof">Jeweller
+Clienteling Agent: OpenClaw Runtime Proof</h1>
+<h2 id="one-line">One-Line</h2>
+<p>Jeweller Clienteling Agent is an OpenClaw-backed concierge demo for
+jewellery enquiries that turns WhatsApp/Instagram-style messages into
+safe customer replies and staff briefs.</p>
+<h2 id="why-it-matters">Why It Matters</h2>
+<p>Jewellery retail has a high-trust front-desk problem: customers ask
+about bespoke pieces, stock, repairs, order status, sourcing,
+complaints, appointments, and prices through informal channels. A
+generic chatbot is risky because it can promise prices, stock, delivery,
+authenticity, or repair outcomes without approval.</p>
+<p>The useful system is a clienteling assistant: fast enough to reduce
+missed enquiries, structured enough to prepare staff, and careful enough
+to escalate commercial or high-risk promises.</p>
+<h2 id="what-i-built">What I Built</h2>
+<ul>
+<li>A deterministic enquiry engine for intent detection, missing-field
+collection, authority level, handoff rules, customer replies, and staff
+briefs.</li>
+<li>Safe handling for bespoke, stock, sourcing, repair, care, complaint,
+order-status, and price-band scenarios.</li>
+<li>Fixture-backed checks for stock, price bands, order-status dry-runs,
+and repair-intake guidance.</li>
+<li>Dry-run WhatsApp and Instagram channel payload contracts with
+<code>send_enabled: false</code>.</li>
+<li>A local OpenClaw runtime adapter that wraps the engine and proves
+the gateway path invokes the real repo code.</li>
+<li>Eval scripts that compare local gateway output with deterministic
+engine output instead of trusting prompt-shaped responses.</li>
+</ul>
+<h2 id="deployment-angle">Deployment Angle</h2>
+<p>This is useful for AI Deployment / FDE roles because it shows the
+same deployment instinct outside education:</p>
+<ul>
+<li>start with the messy workflow where users already message the
+business;</li>
+<li>define which decisions the agent may make and which require
+approval;</li>
+<li>turn unstructured messages into structured operational briefs;</li>
+<li>prove the runtime path, not only the static prompt;</li>
+<li>keep live channels and customer data behind explicit approval.</li>
+</ul>
+<h2 id="technical-shape">Technical Shape</h2>
+<ul>
+<li>Interface model: WhatsApp/Instagram-style inbound enquiries.</li>
+<li>Runtime: local OpenClaw gateway plus repo runtime adapter.</li>
+<li>Core engine: Python deterministic policy and response
+generation.</li>
+<li>Proof: deterministic tests, golden scenario evals, dry-run channel
+contract tests, and local gateway runtime evaluation.</li>
+<li>Guardrails: no exact price promises, no stock holds, no repair
+outcomes, no sourcing guarantees, no private supplier leakage, and staff
+approval for commercial commitments.</li>
+</ul>
+<h2 id="current-proof-level">Current Proof Level</h2>
+<p>The current proof level is <code>runtime-proven-demo</code>: local
+OpenClaw invokes the repo runtime adapter, the adapter invokes the
+deterministic engine, and runtime output is checked against
+deterministic expectations. It is not a live WhatsApp/Instagram
+deployment and does not use real customer data.</p>
+<h2 id="best-interview-angle">Best Interview Angle</h2>
+<p>This project is a good example of deployment judgement. The hard part
+is not making a jewellery chatbot sound polite; it is deciding what the
+system is allowed to do, proving the runtime path, and keeping
+commercial promises behind the right approval boundary.</p>

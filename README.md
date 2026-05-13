@@ -22,6 +22,7 @@ Gateway readiness: https://ai-gateway.shortlistops.co.uk/deployments/teachclaw-l
 - CV PDF under `assets/`
 - TeachClaw/OpenClaw architecture diagram under `assets/`
 - Public-safe FastAPI AI Deployment Gateway under `gateway/`
+- Jeweller clienteling case study with local OpenClaw runtime proof language and no live customer data
 
 ## Gateway
 

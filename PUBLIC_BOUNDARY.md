@@ -7,6 +7,7 @@ It should contain:
 - public-safe portfolio pages
 - sanitized case studies
 - architecture diagrams without private runtime details
+- client/workflow case studies that avoid real customer data and live channel credentials
 - CV PDF
 - public FastAPI Gateway source
 - CI, smoke scripts, Docker files, and deployment notes
